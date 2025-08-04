@@ -2,16 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int totalNumber = 0;
+        Book book1 = new Book("2102", "Ernesto Razo", 328);
+        Book book2 = new Book("2101", "Ernesto", 281);
+        Book book3 = new Book("Networking", "Brian", 180);
 
-        for (int i = 1; i <= 5; i++) {
-            System.out.print("Enter number " + i + ": ");
-            int number = scanner.nextInt();
-            totalNumber += number;
-        }
+        book1.displayInfo();
+        book2.displayInfo();
+        book3.displayInfo();
 
-        System.out.println("Total Number: " + totalNumber);
-        scanner.close();
+        book1.borrowBook();
+        book1.displayInfo();
+
+        book1.returnBook();
+        book1.displayInfo();
     }
 }
