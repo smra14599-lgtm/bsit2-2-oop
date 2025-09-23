@@ -1,0 +1,163 @@
+class Book extends Media {
+    private String author;
+
+    public Book(String title, String itemId, String author) {
+        super(title, itemId);
+        this.author = author;
+    }
+
+    @Override
+    public String getMediaType() {
+        return "Book";
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Book: " + title + " | Author: " + author + " | ID: " + itemId);
+    }
+}
+
+class DVD extends Media {
+    private String director;
+
+    public DVD(String title, String itemId, String director) {
+        super(title, itemId);
+        this.director = director;
+    }
+
+    @Override
+    public String getMediaType() {
+        return "DVD";
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("DVD: " + title + " | Director: " + director + " | ID: " + itemId);
+    }
+}
+
+class Magazine extends Media {
+    private int issueNumber;
+
+    public Magazine(String title, String itemId, int issueNumber) {
+        super(title, itemId);
+        this.issueNumber = issueNumber;
+    }
+
+    @Override
+    public String getMediaType() {
+        return "Magazine";
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("Magazine: " + title + " | Issue: " + issueNumber + " | ID: " + itemId);
+    }
+}
+🟢 PART 2.1 — Library User Interface
+java
+Copy code
+interface LibraryUser {
+    String getUserType();
+    void borrowMedia(Media media);
+    void returnMedia(Media media);
+    int getMaxBorrowLimit();
+}
+🟢 PART 2.2 — User Classes
+java
+Copy code
+class Student implements LibraryUser {
+    private String name;
+    private String studentId;
+
+    public Student(String name, String studentId) {
+        this.name = name;
+        this.studentId = studentId;
+    }
+
+    @Override
+    public String getUserType() { return "Student"; }
+
+    @Override
+    public int getMaxBorrowLimit() { return 3; }
+
+    @Override
+    public void borrowMedia(Media media) {
+        if (media.isAvailable()) {
+            media.borrowItem();
+            System.out.println(name + " (" + getUserType() + ") borrowed: " + media.getTitle());
+        } else {
+            System.out.println("Sorry, " + media.getTitle() + " is not available.");
+        }
+    }
+
+    @Override
+    public void returnMedia(Media media) {
+        media.returnItem();
+        System.out.println(name + " (" + getUserType() + ") returned: " + media.getTitle());
+    }
+}
+
+class Teacher implements LibraryUser {
+    private String name;
+    private String employeeId;
+
+    public Teacher(String name, String employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    @Override
+    public String getUserType() { return "Teacher"; }
+
+    @Override
+    public int getMaxBorrowLimit() { return 5; }
+
+    @Override
+    public void borrowMedia(Media media) {
+        if (media.isAvailable()) {
+            media.borrowItem();
+            System.out.println(name + " (" + getUserType() + ") borrowed: " + media.getTitle());
+        } else {
+            System.out.println("Sorry, " + media.getTitle() + " is not available.");
+        }
+    }
+
+    @Override
+    public void returnMedia(Media media) {
+        media.returnItem();
+        System.out.println(name + " (" + getUserType() + ") returned: " + media.getTitle());
+    }
+}
+
+class Librarian implements LibraryUser {
+    private String name;
+    private String employeeId;
+
+    public Librarian(String name, String employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    @Override
+    public String getUserType() { return "Librarian"; }
+
+    @Override
+    public int getMaxBorrowLimit() { return 10; }
+
+    @Override
+    public void borrowMedia(Media media) {
+        if (media.isAvailable()) {
+            media.borrowItem();
+            System.out.println(name + " (" + getUserType() + ") borrowed: " + media.getTitle());
+        } else {
+            System.out.println("Sorry, " + media.getTitle() + " is not available.");
+        }
+    }
+
+    @Override
+    public void returnMedia(Media media) {
+        media.returnItem();
+        System.out.println(name + " (" + getUserType() + ") returned: " + media.getTitle());
+    }
+}
